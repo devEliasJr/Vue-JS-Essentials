@@ -1,14 +1,17 @@
 <script>
-import Github from './components/Guthub.vue'
+import OptionsApi from './components/OptionsApi.vue'
+import CompositionApi from './components/CompositionApi.vue';
 export default {
   components: {
-    Github
+    OptionsApi,
+    CompositionApi
   }
 }
 </script>
 
 <template>
-  <Github />
+  <OptionsApi />
+  <CompositionApi />
 </template>
 
 <style></style>
