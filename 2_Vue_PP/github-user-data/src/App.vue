@@ -59,6 +59,7 @@ input,
 button {
   max-width: 20rem;
   margin: 1rem auto;
+  margin-right: 15px;
 }
 
 input {
