@@ -1,6 +1,8 @@
 <script setup>
-// import OptionsApi from './components/OptionsApi.vue'
 import CompositionApi from './components/CompositionApi.vue';
+
+// import OptionsApi from './components/OptionsApi.vue'
+
 
 // CHAMADA Para o uso com Option API
 // export default {
