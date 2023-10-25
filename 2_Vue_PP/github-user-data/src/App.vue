@@ -1,33 +1,14 @@
 <script setup>
-import { ref } from 'vue';
-import Profile from './components/Profile.vue';
-
-
-// import OptionsApi from './components/OptionsApi.vue'
-
-
-// CHAMADA Para o uso com Option API
-// export default {
-//   components: {
-//     OptionsApi,
-//   }
-// }
-
-const isOpen = ref(true);
+import { RouterLink, RouterView } from 'vue-router';
 
 </script>
 
 <template>
-  <!-- <OptionsApi /> -->
-  <input type="checkbox" v-model="isOpen" />{{ isOpen }}
-  <Profile v-if="isOpen">
-    <h1>GitHub User Data</h1>
-    <template v-slot:footer>
-      <footer>
-        Desenvolvido por Elias Jr.
-      </footer>
-    </template>
-  </Profile>
+  <nav>
+    <RouterLink to="/">Home</RouterLink>
+    <RouterLink to="/search">Search</RouterLink>
+  </nav>
+  <RouterView></RouterView>
 </template>
 
 <style>
@@ -113,5 +94,27 @@ footer {
   height: 2rem;
   margin-top: 2rem;
   padding: 1rem 0;
+}
+
+a {
+  color: #f64348;
+  font-weight: 600;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+a + a {
+  margin-left: 1rem;
+}
+
+a:hover {
+  cursor:pointer;
+  filter: brightness(.9);
+}
+
+nav {
+  border-bottom: 1px solid #fff;
+  padding: 1rem 0;
+  margin-bottom: 1rem;
 }
 </style>
