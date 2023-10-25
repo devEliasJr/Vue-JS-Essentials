@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref, computed } from 'vue';
+import { reactive, ref, computed, onMounted, onUnmounted, onUpdated } from 'vue';
 
 
 const searchInput = ref('');
@@ -48,12 +48,29 @@ const reposCountMessage = computed(() => {
     : `${state.name} não possui repositorios públicos`
 })
 
+const testeMonted = (name) => {
+  console.log(name);
+}
+
+onMounted(() => {
+  console.log('Componente Montado')
+  testeMonted('Elias')
+});
+
+onUpdated(() => {
+  console.log('Componente foi atualizado')
+})
+
+onUnmounted(() => {
+  console.log('Componente desmontado')
+})
+
 </script>
 
 <template>
   <h1>GitHub User Data</h1>
   <form @submit="fetchGithubUser">
-    <input required type="text" v-model="searchInput" placeholder="Nome do usuario">
+    <input required type="text" v-model.lazy="searchInput" placeholder="Nome do usuario">
     <button>Carregar Usuario</button>
   </form>
   <div v-if="state.login !== ''">
