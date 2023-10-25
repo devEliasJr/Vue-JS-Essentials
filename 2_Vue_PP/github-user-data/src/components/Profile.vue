@@ -5,6 +5,8 @@ import Repository from './Repository.vue'
 import Form from './Form.vue';
 
 
+const username = ref('')
+
 const state = reactive({
   login: "devEliasJr",
   name: "Elias",
@@ -68,8 +70,9 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <h1>GitHub User Data</h1>
-  <Form @form-submit="fetchGithubUser" />
+  <slot></slot>
+  <p>Pesquisando por: <strong>{{ username }}</strong></p>
+  <Form @form-submit="fetchGithubUser" v-model="username" />
   <UserInfo v-if="state.login !== ''" :login="state.login" :name="state.name" :company="state.company"
     :avatar_url="state.avatar_url" :bio="state.bio" />
   <section v-if="state.repos.length > 0">
@@ -78,4 +81,5 @@ onUnmounted(() => {
       <Repository :repo="repo" />
     </article>
   </section>
+  <slot name="footer"></slot>
 </template>

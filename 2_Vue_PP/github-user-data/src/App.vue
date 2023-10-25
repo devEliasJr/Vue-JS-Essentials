@@ -20,7 +20,14 @@ const isOpen = ref(true);
 <template>
   <!-- <OptionsApi /> -->
   <input type="checkbox" v-model="isOpen" />{{ isOpen }}
-  <Profile v-if="isOpen" />
+  <Profile v-if="isOpen">
+    <h1>GitHub User Data</h1>
+    <template v-slot:footer>
+      <footer>
+        Desenvolvido por Elias Jr.
+      </footer>
+    </template>
+  </Profile>
 </template>
 
 <style>
@@ -100,5 +107,11 @@ button:hover {
 
 a {
   color: #f64348;
+}
+
+footer {
+  height: 2rem;
+  margin-top: 2rem;
+  padding: 1rem 0;
 }
 </style>
