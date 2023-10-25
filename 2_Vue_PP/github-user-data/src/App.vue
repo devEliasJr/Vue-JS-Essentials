@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
-import CompositionApi from './components/CompositionApi.vue';
+import Profile from './components/Profile.vue';
+
 
 // import OptionsApi from './components/OptionsApi.vue'
 
@@ -19,7 +20,7 @@ const isOpen = ref(true);
 <template>
   <!-- <OptionsApi /> -->
   <input type="checkbox" v-model="isOpen" />{{ isOpen }}
-  <CompositionApi v-if="isOpen" />
+  <Profile v-if="isOpen" />
 </template>
 
 <style>

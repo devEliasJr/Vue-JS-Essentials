@@ -1,8 +1,9 @@
 <script setup>
 import { reactive, ref, computed, onMounted, onUnmounted, onUpdated } from 'vue';
+import UserInfo from './UserInfo.vue';
+import Repository from './Repository.vue'
+import Form from './Form.vue';
 
-
-const searchInput = ref('');
 
 const state = reactive({
   login: "devEliasJr",
@@ -13,15 +14,14 @@ const state = reactive({
   repos: [],
 })
 
-async function fetchGithubUser(e) {
+async function fetchGithubUser(searchInput) {
 
-  e.preventDefault();
 
-  if (searchInput.value === "") {
+  if (searchInput === "") {
     return
   }
 
-  const res = await fetch(`https://api.github.com/users/${searchInput.value}`);
+  const res = await fetch(`https://api.github.com/users/${searchInput}`);
   const { login, name, bio, company, avatar_url } = await res.json();
 
   state.login = login;
@@ -69,23 +69,13 @@ onUnmounted(() => {
 
 <template>
   <h1>GitHub User Data</h1>
-  <form @submit="fetchGithubUser">
-    <input required type="text" v-model.lazy="searchInput" placeholder="Nome do usuario">
-    <button>Carregar Usuario</button>
-  </form>
-  <div v-if="state.login !== ''">
-    <img v-bind:src="state.avatar_url">
-    <strong>@{{ state.login }}</strong>
-    <h1>{{ state.name }}</h1>
-    <h2>{{ state.company }}</h2>
-    <span>{{ state.bio }}</span>
-  </div>
+  <Form @form-submit="fetchGithubUser" />
+  <UserInfo v-if="state.login !== ''" :login="state.login" :name="state.name" :company="state.company"
+    :avatar_url="state.avatar_url" :bio="state.bio" />
   <section v-if="state.repos.length > 0">
     <h2>{{ reposCountMessage }}</h2>
     <article v-for="repo of state.repos" :key="repo.id">
-      <h3>{{ repo.full_name }}</h3>
-      <p>{{ repo.description }}</p>
-      <a :href="repo.html_url" target="_blank">Ver no Github</a>
+      <Repository :repo="repo" />
     </article>
   </section>
 </template>
